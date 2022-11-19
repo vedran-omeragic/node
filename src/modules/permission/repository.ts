@@ -5,7 +5,7 @@ export default class PermissionRepository {
 		return await prisma.permission.findMany({
 			orderBy: {
 				code: "asc",
-			}
+			},
 		});
 	}
 }

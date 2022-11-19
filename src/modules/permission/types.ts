@@ -1,4 +1,4 @@
 export interface PermissionOutput {
 	code: string;
-    description: string | null;
+	description: string | null;
 }
