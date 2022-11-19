@@ -59,5 +59,8 @@
 		"hooks": {
 			"pre-commit": "sh hooks/pre-commit"
 		}
+	},
+	"prisma": {
+		"seed": "ts-node prisma/seed.ts"
 	}
 }
