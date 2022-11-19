@@ -4,6 +4,7 @@ import express, { json, Router } from "express";
 import morgan from "morgan";
 
 import errorHandlerMiddleware from "./middleware/error-handler.middleware";
+import permissionRouter from "./modules/permission/router";
 import userRouter from "./modules/user/router";
 
 const port = 5000;
@@ -17,6 +18,7 @@ app.listen(port, () => {
 
 const routes = Router();
 routes.use("/users", userRouter);
+routes.use("/permissions", permissionRouter);
 
 app.use(routes);
 
