@@ -1,0 +1,107 @@
+{
+	"env": {
+		"browser": true,
+		"es2021": true,
+		"node": true
+	},
+	"extends": [
+		"eslint:recommended",
+		"plugin:@typescript-eslint/eslint-recommended",
+		"plugin:@typescript-eslint/recommended",
+		"plugin:import/recommended",
+		"plugin:import/typescript",
+		"prettier"
+	],
+	"overrides": [],
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"project": "tsconfig.json",
+		"ecmaVersion": "latest",
+		"sourceType": "module"
+	},
+	"plugins": ["@typescript-eslint", "import", "prettier"],
+	"rules": {
+		"@typescript-eslint/ban-types": [
+			"warn",
+			{
+				"types": { "Function": true },
+				"extendDefaults": true
+			}
+		],
+		"@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+		"@typescript-eslint/no-use-before-define": 1,
+		"curly": 2,
+		"eqeqeq": 2,
+		"import/default": 2,
+		"import/export": 2,
+		"import/extensions": 1,
+		"import/named": 2,
+		"import/namespace": 2,
+		"import/no-cycle": 2,
+		"import/no-duplicates": 2,
+		"import/no-self-import": 2,
+		"import/no-unresolved": 2,
+		"import/order": [
+			2,
+			{
+				"alphabetize": {
+					"order": "asc",
+					"caseInsensitive": false
+				},
+				"groups": ["builtin", "external", "internal", "unknown", "parent", "sibling", "index", "object", "type"],
+				"newlines-between": "always",
+				"pathGroups": [
+					{
+						"group": "external",
+						"pattern": "express",
+						"position": "before"
+					},
+					{
+						"group": "external",
+						"pattern": "express*",
+						"position": "before"
+					},
+					{
+						"group": "external",
+						"pattern": "prisma",
+						"position": "before"
+					},
+					{
+						"group": "internal",
+						"pattern": "middleware"
+					},
+					{
+						"group": "internal",
+						"pattern": "routes"
+					},
+					{
+						"group": "internal",
+						"pattern": "utils"
+					},
+					{
+						"group": "internal",
+						"pattern": "modules*"
+					},
+					{
+						"group": "internal",
+						"pattern": "tests"
+					}
+				]
+			}
+		],
+		"indent": ["error", "tab"],
+		"linebreak-style": ["error", "unix"],
+		"no-empty": 2,
+		"no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+		"prettier/prettier": 0,
+		"quotes": ["error", "double", { "avoidEscape": true }],
+		"semi": ["error", "always"]
+	},
+	"settings": {
+		"import/parsers": { "@typescript-eslint/parser": [".ts", ".tsx"] },
+		"import/resolver": {
+			"typescript": true,
+			"node": true
+		}
+	}
+}
