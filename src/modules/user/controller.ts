@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import _ from "lodash";
 
 import asyncWrapper from "../../middleware/async-wrapper.middleware";
+import UserPermissionService from "../user_permission/service";
 
 import UserService from "./service";
 import { UserCreateInput } from "./types";
@@ -31,6 +32,29 @@ export default class UserController {
 		const userId = Number(_.get(req, "params.id", 0));
 		const payload: UserCreateInput = req.body;
 		const serviceResponse = await UserService.updateUser(userId, payload);
+		return res.status(200).json(serviceResponse);
+	});
+
+	static getUserPermissions = asyncWrapper(async (req: Request, res: Response, _next: NextFunction) => {
+		const userId = Number(_.get(req, "params.id", 0));
+		const user = await UserService.getUserWithId(userId);
+		const serviceResponse = await UserPermissionService.getAllUserPermissions(user.id);
+		return res.status(200).json(serviceResponse);
+	});
+
+	static createUserPermission = asyncWrapper(async (req: Request, res: Response, _next: NextFunction) => {
+		const userId = Number(_.get(req, "params.id", 0));
+		const code = _.get(req, "body.code", "").toString();
+		const user = await UserService.getUserWithId(userId);
+		const serviceResponse = await UserPermissionService.createUserPermission(user.id, code);
+		return res.status(200).json(serviceResponse);
+	});
+
+	static deleteUserPermission = asyncWrapper(async (req: Request, res: Response, _next: NextFunction) => {
+		const userId = Number(_.get(req, "params.id", 0));
+		const code = _.get(req, "body.code", "").toString();
+		const user = await UserService.getUserWithId(userId);
+		const serviceResponse = await UserPermissionService.deleteUserPermission(user.id, code);
 		return res.status(200).json(serviceResponse);
 	});
 }
