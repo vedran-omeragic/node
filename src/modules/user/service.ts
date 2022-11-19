@@ -20,7 +20,7 @@ export default class UserService {
 
 	static createUser = async (userData: UserCreateInput) => {
 		// Since username and email are unique, check to see if user with such already exist
-		const userExists = await UserRepository.findUser(userData.username, userData.email);
+		const userExists = await UserRepository.findUserUnique(userData.username, userData.email);
 		if (userExists.length > 0) {
 			throw new UsernameOrEmailInUse(userData.username, userData.email);
 		}
@@ -28,5 +28,23 @@ export default class UserService {
 		userData.password = await hash(userData.password, 10);
 		const newUser = await UserRepository.createUser(userData);
 		return newUser;
+	};
+
+	static updateUser = async (id: number, userData: UserCreateInput) => {
+		const user = await UserRepository.getUserWithId(id);
+		if (!user) {
+			throw new UserNotFound(id);
+		}
+
+		// If username or email changed enforce unique
+		if (user.username !== userData.email || user.email !== userData.email) {
+			const userExists = await UserRepository.findUserUniqueExcludeId(userData.username, userData.email, id);
+			if (userExists.length > 0) {
+				throw new UsernameOrEmailInUse(userData.username, userData.email);
+			}
+		}
+
+		const updatedUser = await UserRepository.updateUser(id, userData);
+		return updatedUser;
 	};
 }
