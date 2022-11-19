@@ -9,4 +9,10 @@ export default class UserController {
 		const serviceResponse = await UserService.getUserList();
 		return res.status(200).json(serviceResponse);
 	});
+
+	static getUserWithId = asyncWrapper(async (req: Request, res: Response, _next: NextFunction) => {
+		const userId = Number(req.params.id);
+		const serviceResponse = await UserService.getUserWithId(userId);
+		return res.status(200).json(serviceResponse);
+	});
 }
