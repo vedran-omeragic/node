@@ -5,8 +5,8 @@ import UserRepository from "./repository";
 import { UserCreateInput } from "./types";
 
 export default class UserService {
-	static getUserList = async () => {
-		const userList = await UserRepository.getUserList();
+	static getUserList = async (page: number, sortColumn: string, sortDirection: string) => {
+		const userList = await UserRepository.getUserList(page, sortColumn, sortDirection);
 		return userList;
 	};
 
