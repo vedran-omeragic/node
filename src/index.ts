@@ -1,6 +1,6 @@
 import { config } from "dotenv";
 config();
-import express, { Router } from "express";
+import express, { json, Router } from "express";
 import morgan from "morgan";
 
 import errorHandlerMiddleware from "./middleware/error-handler.middleware";
@@ -8,7 +8,7 @@ import userRouter from "./modules/user/router";
 
 const port = 5000;
 const app = express();
-
+app.use(json());
 app.use(morgan("dev"));
 
 app.listen(port, () => {

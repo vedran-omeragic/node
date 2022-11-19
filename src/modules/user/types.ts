@@ -1,3 +1,5 @@
+import { Prisma } from "@prisma/client";
+
 export interface UserOutput {
 	id: number;
 	username: string;
@@ -10,3 +12,5 @@ export interface UserOutput {
 	updated_at: Date | null;
 	user_permissions: any;
 }
+
+export type UserCreateInput = Prisma.UserCreateInput;
