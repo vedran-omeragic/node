@@ -103,6 +103,8 @@ dist
 # TernJS port file
 .tern-port
 
+# Hide build from version control
+build/index.js
 
 ## Hide package lock until all deps are installed
 package-lock.json
