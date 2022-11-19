@@ -2,6 +2,8 @@ import prisma from "../../prisma_client";
 
 import { UserCreateInput, UserOutput } from "./types";
 
+const paginationOffset = 10;
+
 const userView = {
 	id: true,
 	username: true,
@@ -17,12 +19,23 @@ const userView = {
 };
 
 export default class UserRepository {
-	static async getUserList(): Promise<UserOutput[]> {
+	static async getUserList(page: number, sortColumn?: string, sortDirection?: string): Promise<UserOutput[]> {
+		const orderOptions = { orderBy: {} };
+		const sortOptions: string[] = Object.keys(userView);
+
+		if (sortColumn && sortOptions.includes(sortColumn)) {
+			orderOptions.orderBy = {
+				[sortColumn]: sortDirection === "desc" ? "desc" : "asc",
+			};
+		}
+
 		return await prisma.user.findMany({
 			include: {
 				user_permissions: true,
 			},
-			where: {},
+			...orderOptions,
+			skip: page * paginationOffset,
+			take: paginationOffset,
 		});
 	}
 
