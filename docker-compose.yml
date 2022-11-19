@@ -1,0 +1,16 @@
+version: "12"
+services:
+  localdb:
+    container_name: localdb
+    image: "postgres:12"
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=nodeuser
+      - POSTGRES_PASSWORD=notasecret
+      - POSTGRES_DB=nodeapp
+    volumes:
+      - data:/var/lib/postgresql/data
+
+volumes:
+  data: {}

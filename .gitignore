@@ -104,7 +104,7 @@ dist
 .tern-port
 
 # Hide build from version control
-build/index.js
+build/*
 
 ## Hide package lock until all deps are installed
 package-lock.json

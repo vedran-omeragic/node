@@ -1,0 +1,9 @@
+{
+	"development": {
+		"username": "nodeuser",
+		"password": "notasecret",
+		"database": "nodeapp",
+		"host": "127.0.0.1",
+		"dialect": "postgres"
+	}
+}
