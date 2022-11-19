@@ -22,4 +22,11 @@ export default class UserController {
 		const serviceResponse = await UserService.createUser(payload);
 		return res.status(200).json(serviceResponse);
 	});
+
+	static updateUser = asyncWrapper(async (req: Request, res: Response, _next: NextFunction) => {
+		const userId = Number(req.params.id);
+		const payload: UserCreateInput = req.body;
+		const serviceResponse = await UserService.updateUser(userId, payload);
+		return res.status(200).json(serviceResponse);
+	});
 }

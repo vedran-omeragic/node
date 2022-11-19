@@ -40,10 +40,29 @@ export default class UserRepository {
 		});
 	}
 
-	static async findUser(username: string, email: string) {
+	static async updateUser(id: number, userData: UserCreateInput): Promise<UserOutput> {
+		return await prisma.user.update({
+			where: {
+				id: id,
+			},
+			data: userData,
+			select: userView,
+		});
+	}
+
+	static async findUserUnique(username: string, email: string) {
 		return await prisma.user.findMany({
 			where: {
 				OR: [{ username: username }, { email: email }],
+			},
+		});
+	}
+
+	static async findUserUniqueExcludeId(username: string, email: string, id: number) {
+		return await prisma.user.findMany({
+			where: {
+				OR: [{ username: username }, { email: email }],
+				NOT: { id: id },
 			},
 		});
 	}

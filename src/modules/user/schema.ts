@@ -50,3 +50,8 @@ export const NewUserSchema: Schema = {
 		optional: true,
 	},
 };
+
+export const UpdateUserSchema: Schema = {
+	...UserIdSchema,
+	...NewUserSchema,
+};
