@@ -102,3 +102,7 @@ dist
 
 # TernJS port file
 .tern-port
+
+
+## Hide package lock until all deps are installed
+package-lock.json
