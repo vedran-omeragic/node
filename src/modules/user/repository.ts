@@ -20,13 +20,22 @@ const userView = {
 };
 
 export default class UserRepository {
-	static async getUserList(page: number, sortColumn?: string, sortDirection?: string): Promise<UserOutput[]> {
-		const orderOptions = { orderBy: {} };
+	static async getUserList(
+		page: number,
+		sortColumn?: string,
+		sortDirection?: string,
+		search?: string
+	): Promise<UserOutput[]> {
+		let orderOptions = {};
 		const sortOptions: string[] = Object.keys(userView);
 
 		if (sortColumn && sortOptions.includes(sortColumn)) {
-			orderOptions.orderBy = {
+			orderOptions = {
 				[sortColumn]: sortDirection === "desc" ? "desc" : "asc",
+			};
+		} else {
+			orderOptions = {
+				created_at: "desc",
 			};
 		}
 
@@ -34,7 +43,41 @@ export default class UserRepository {
 			include: {
 				user_permissions: true,
 			},
-			...orderOptions,
+			where: {
+				OR: [
+					{
+						username: {
+							contains: search,
+							mode: "insensitive",
+						},
+					},
+					{
+						email: {
+							contains: search,
+							mode: "insensitive",
+						},
+					},
+					{
+						first_name: {
+							contains: search,
+							mode: "insensitive",
+						},
+					},
+					{
+						last_name: {
+							contains: search,
+							mode: "insensitive",
+						},
+					},
+					{
+						status: {
+							contains: search,
+							mode: "insensitive",
+						},
+					},
+				],
+			},
+			orderBy: { ...orderOptions },
 			skip: page * paginationOffset,
 			take: paginationOffset,
 		});
