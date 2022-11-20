@@ -35,6 +35,12 @@ export default class UserController {
 		return res.status(200).json(serviceResponse);
 	});
 
+	static deleteUser = asyncWrapper(async (req: Request, res: Response, _next: NextFunction) => {
+		const userId = Number(_.get(req, "params.id", 0));
+		const serviceResponse = await UserService.deleteUser(userId);
+		return res.status(200).json(serviceResponse);
+	});
+
 	static getUserPermissions = asyncWrapper(async (req: Request, res: Response, _next: NextFunction) => {
 		const userId = Number(_.get(req, "params.id", 0));
 		const user = await UserService.getUserWithId(userId);

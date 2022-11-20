@@ -24,6 +24,10 @@ userRouter.patch("/:id", validateRequest(UpdateUserSchema), (req: Request, res: 
 	return UserController.updateUser(req, res, next);
 });
 
+userRouter.delete("/:id", validateRequest(UserIdSchema), (req: Request, res: Response, next: NextFunction) => {
+	return UserController.deleteUser(req, res, next);
+});
+
 userRouter.get("/:id/perms/", validateRequest(UserIdSchema), (req: Request, res: Response, next: NextFunction) => {
 	return UserController.getUserPermissions(req, res, next);
 });

@@ -47,4 +47,9 @@ export default class UserService {
 		const updatedUser = await UserRepository.updateUser(id, userData);
 		return updatedUser;
 	};
+
+	static deleteUser = async (id: number) => {
+		const updatedUser = await UserRepository.deleteUser(id);
+		return updatedUser;
+	};
 }

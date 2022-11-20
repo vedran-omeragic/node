@@ -1,6 +1,7 @@
 import prisma from "../../prisma_client";
 
-import { UserCreateInput, UserOutput } from "./types";
+import { UserNotFound } from "./errors";
+import { User, UserCreateInput, UserOutput } from "./types";
 
 const paginationOffset = 10;
 
@@ -61,6 +62,18 @@ export default class UserRepository {
 			data: userData,
 			select: userView,
 		});
+	}
+
+	static async deleteUser(userId: number): Promise<User> {
+		return await prisma.user
+			.delete({
+				where: {
+					id: userId,
+				},
+			})
+			.catch(() => {
+				throw new UserNotFound(userId);
+			});
 	}
 
 	static async findUserUnique(username: string, email: string) {
