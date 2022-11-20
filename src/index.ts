@@ -1,3 +1,4 @@
+import cors from "cors";
 import { config } from "dotenv";
 config();
 import express, { json, Router } from "express";
@@ -9,6 +10,8 @@ import userRouter from "./modules/user/router";
 
 const port = 5000;
 const app = express();
+
+app.use(cors({ origin: "*" }));
 app.use(json());
 app.use(morgan("dev"));
 

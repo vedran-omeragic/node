@@ -5,13 +5,23 @@ Server app made using Node.js / Typescript
 Project uses:
 
 **Express** - for building RESTful API routes
+
 **express-validator** - to validate request payloads using pre-defined schemas
+
 **Morgan** - for loging incoming requests and responses
+
 **Prisma** - ORM to make managing queries easier
+
 **ESLint, Prettier and Husky** - to make devs life easier
+
 **nodemon** - to track changes and automatically restart the app
+
 **bcrypt** - for encrypting passwords
+
 **dotenv** - for managing ENV variables
+
+**cors** - to deal with requests restrictions
+
 **lodash** - to extract stuff without linter screaming at you
 
 ## Requirements
