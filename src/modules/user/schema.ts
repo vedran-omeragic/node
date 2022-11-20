@@ -13,16 +13,28 @@ export const NewUserSchema: Schema = {
 	username: {
 		in: ["body"],
 		isString: true,
+		isLength: {
+			options: { min: 3 },
+			errorMessage: "Username must be at least 6 characters long",
+		},
 		errorMessage: "Invalid input format for field `username`. Must be a string.",
 	},
 	email: {
 		in: ["body"],
 		isEmail: true,
+		isLength: {
+			options: { min: 6 },
+			errorMessage: "Email must be at least 6 characters long",
+		},
 		errorMessage: "Invalid input format for field `email`. Must be a valid email address.",
 	},
 	password: {
 		in: ["body"],
 		isString: true,
+		isLength: {
+			options: { min: 6 },
+			errorMessage: "Password must be at least 6 characters long",
+		},
 		errorMessage: "Invalid input format for field `password`. Must be a string.",
 	},
 	first_name: {

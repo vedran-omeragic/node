@@ -104,6 +104,3 @@ dist
 
 # Hide build from version control
 build/*
-
-## Hide package lock until all deps are installed
-package-lock.json
