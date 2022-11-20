@@ -35,7 +35,7 @@ model Permission {
 
 model UserPermission {
     user_id         Int
-    user            User        @relation(fields: [user_id], references: [id])
+    user            User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
     permission_code String
     permission      Permission  @relation(fields: [permission_code], references: [code])
 

@@ -1,4 +1,4 @@
-import { Prisma } from "@prisma/client";
+import { Prisma, UserPermission, User as PrismaUserType } from "@prisma/client";
 
 export interface UserOutput {
 	id: number;
@@ -10,7 +10,9 @@ export interface UserOutput {
 	status: string | null;
 	created_at: Date;
 	updated_at: Date | null;
-	user_permissions: any;
+	user_permissions: UserPermission[] | null;
 }
 
 export type UserCreateInput = Prisma.UserCreateInput;
+
+export type User = PrismaUserType;
