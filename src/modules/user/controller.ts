@@ -12,7 +12,8 @@ export default class UserController {
 		const page = Number(_.get(req, "query.page", 0));
 		const sortColumn: string = _.get(req, "query.order_by", "").toString();
 		const sortDirection: string = _.get(req, "query.sort", "").toString();
-		const serviceResponse = await UserService.getUserList(page, sortColumn, sortDirection);
+		const search: string = _.get(req, "query.search", "").toString();
+		const serviceResponse = await UserService.getUserList(page, sortColumn, sortDirection, search);
 		return res.status(200).json(serviceResponse);
 	});
 
